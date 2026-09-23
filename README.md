@@ -23,8 +23,8 @@ Open your WSL Ubuntu terminal and start the Docker daemon:
 
 ```bash
 sudo service docker start
-Enter your sudo password when prompted.
 ```
+Enter your sudo password when prompted.
 
 2. Create the Project Directory
 Create a dedicated folder for your BookStack deployment and navigate into it:
