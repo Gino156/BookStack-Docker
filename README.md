@@ -24,27 +24,32 @@ Open your WSL Ubuntu terminal and start the Docker daemon:
 ```bash
 sudo service docker start
 Enter your sudo password when prompted.
+```
 
 2. Create the Project Directory
 Create a dedicated folder for your BookStack deployment and navigate into it:
 
-Bash
+```bash
 mkdir -p ~/bookstack && cd ~/bookstack
+```
 3. Generate an Application Key (APP_KEY)
 BookStack requires an encryption key before it can start. Generate one by running:
 
-Bash
+```bash
 docker run -it --rm --entrypoint /bin/bash lscr.io/linuxserver/bookstack:latest appkey
+```
+
 Copy the generated output string (e.g., base64:UJGtYKyNuJWPps6WU4ij0/ZMToEviZJgjh82DqC6ij0=).
 
 4. Create and Configure docker-compose.yml
 Open the file editor:
 
-Bash
+```bash
 nano docker-compose.yml
+```
 Paste the following configuration into the file (make sure to update the APP_KEY line with your generated key):
 
-YAML
+```bash
 version: "3.8"
 
 services:
@@ -84,19 +89,23 @@ services:
     volumes:
       - ./db_config:/config
     restart: unless-stopped
+```
 Save and exit nano by pressing Ctrl + O, Enter, then Ctrl + X.
 
 5. Launch the Containers
 Start BookStack and MariaDB in detached mode:
 
-Bash
+```bash
 docker compose up -d
+```
 6. Verify Installation
 To monitor initialization and view logs, execute:
 
-Bash
+```bash
 docker logs -f bookstack
-🔐 Accessing BookStack
+```
+
+Accessing BookStack
 Once the containers are initialized, open your browser in Windows and navigate to:
 
 URL: http://localhost:6875
@@ -112,14 +121,17 @@ Password: password
 🛠️ Management Commands
 Stop containers:
 
-Bash
+```bash
 docker compose down
+```
 Restart containers:
 
-Bash
+```bash
 docker compose restart
+```
 Clear application cache (troubleshooting):
 
-Bash
+```bash
 docker exec -it bookstack php /app/www/artisan cache:clear
 docker exec -it bookstack php /app/www/artisan view:clear
+```
